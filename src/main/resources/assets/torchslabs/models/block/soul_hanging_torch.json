@@ -1,0 +1,6 @@
+{
+    "parent": "torchslabs:block/template_hanging_torch",
+    "textures": {
+        "torch": "block/soul_torch"
+    }
+}

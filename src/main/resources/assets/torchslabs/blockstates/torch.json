@@ -1,5 +1,8 @@
 {
     "variants": {
-        "": { "model": "torchslabs:block/torch" }
+        "hanging=false,lowered=false": { "model": "torchslabs:block/torch" },
+        "hanging=false,lowered=true":  { "model": "torchslabs:block/torch" },
+        "hanging=true,lowered=false":  { "model": "torchslabs:block/hanging_torch" },
+        "hanging=true,lowered=true":   { "model": "torchslabs:block/hanging_torch_low" }
     }
 }

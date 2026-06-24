@@ -6,9 +6,11 @@ import java.util.function.Supplier;
 
 //import com.endlesnights.naturalslabsmod.blocks.FenceSlabBlock;
 import com.github.bigenergy.torchslabs.TorchSlabsMod;
+import com.github.bigenergy.torchslabs.blocks.vanilla.BlockTorchSlab;
 
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.material.Fluids;
@@ -54,17 +56,31 @@ public class PlaceHandlerTorchSlab
 		Level world = event.getLevel();
 		SoundType soundType;
 
+		// Top of a BOTTOM slab -> upright torch.
+		// Underside of a TOP slab    -> hanging torch (sits high).
+		// Underside of a BOTTOM slab -> hanging torch (sits half a block lower).
+		boolean onBottomSlabTop = face == Direction.UP
+				&& world.getBlockState(pos).getBlock() instanceof SlabBlock
+				&& world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.BOTTOM;
+		boolean underTopSlab = face == Direction.DOWN
+				&& world.getBlockState(pos).getBlock() instanceof SlabBlock
+				&& world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.TOP;
+		boolean underBottomSlab = face == Direction.DOWN
+				&& world.getBlockState(pos).getBlock() instanceof SlabBlock
+				&& world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.BOTTOM;
+		boolean hanging = underTopSlab || underBottomSlab;
+
 		if(
-				face == Direction.UP 
-				&& ((world.getBlockState(pos).getBlock() instanceof SlabBlock && world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.BOTTOM)
+				(onBottomSlabTop || hanging)
 				//|| (ModList.get().isLoaded("naturalslabsmod") && world.getBlockState(pos).getBlock() instanceof FenceSlabBlock)
-				)
 				&& (world.isEmptyBlock(placeAt) || world.getFluidState(placeAt).getType() == Fluids.WATER || world.getFluidState(placeAt).getType() == Fluids.FLOWING_WATER) )
-		{	
+		{
+			BlockState toPlace = block.defaultBlockState()
+					.setValue(BlockStateProperties.HANGING, hanging)
+					.setValue(BlockTorchSlab.LOWERED, underBottomSlab);
 			if (block instanceof SimpleWaterloggedBlock)
-				world.setBlockAndUpdate(placeAt, block.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, (world.getFluidState(placeAt).getType() == Fluids.WATER) ));
-			else
-				world.setBlockAndUpdate(placeAt, block.defaultBlockState());
+				toPlace = toPlace.setValue(BlockStateProperties.WATERLOGGED, (world.getFluidState(placeAt).getType() == Fluids.WATER) );
+			world.setBlockAndUpdate(placeAt, toPlace);
 
 //			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), block.getSoundType(world.getBlockState(pos)).getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
 			soundType = block.getSoundType(block.defaultBlockState(), world, pos, event.getEntity());

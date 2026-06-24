@@ -1,5 +1,8 @@
 {
     "variants": {
-        "": { "model": "torchslabs:block/soul_torch" }
+        "hanging=false,lowered=false": { "model": "torchslabs:block/soul_torch" },
+        "hanging=false,lowered=true":  { "model": "torchslabs:block/soul_torch" },
+        "hanging=true,lowered=false":  { "model": "torchslabs:block/soul_hanging_torch" },
+        "hanging=true,lowered=true":   { "model": "torchslabs:block/soul_hanging_torch_low" }
     }
 }
