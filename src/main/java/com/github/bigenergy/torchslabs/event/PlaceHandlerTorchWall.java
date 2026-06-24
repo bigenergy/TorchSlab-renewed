@@ -6,7 +6,6 @@ import java.util.function.Supplier;
 
 import com.github.bigenergy.torchslabs.TorchSlabsMod;
 import com.github.bigenergy.torchslabs.blocks.vanilla.BlockWallTorchSlab;
-import com.github.bigenergy.torchslabs.config.Config;
 import com.github.bigenergy.torchslabs.config.TorchSlabConfig;
 
 import net.minecraft.world.level.block.*;
@@ -27,7 +26,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @SuppressWarnings("deprecation")
@@ -55,7 +53,6 @@ public class PlaceHandlerTorchWall
 		Player playerIn = event.getEntity();
 		SoundType soundType;
 
-		Config.loadConfig(Config.SERVER, FMLPaths.CONFIGDIR.get().resolve("torchslabs-server.toml").toString());
 		if(!playerIn.isSteppingCarefully() && TorchSlabConfig.interactiveCheckList.get().contains(ForgeRegistries.BLOCKS.getKey(world.getBlockState(pos).getBlock()).toString()) )
 			return;
 		

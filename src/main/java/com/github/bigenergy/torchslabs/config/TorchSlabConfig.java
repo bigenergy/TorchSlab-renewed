@@ -16,7 +16,7 @@ public class TorchSlabConfig
 	{
 		wallLanternCheck = server
 				.comment("Allow the user to place lanterns on the sides of blocks, and on the sides of slabs [True / False]")
-				.define("torchslabmodconfig.LanternLowerBlockCheck", true)
+				.define("torchslabmodconfig.LanternWallBlockCheck", true)
 				;
 		
 		lowerLanternCheck = server
