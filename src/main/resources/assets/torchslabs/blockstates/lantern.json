@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "hanging=true": { "model": "torchslabs:block/hanging_lantern"},
+        "hanging=false": { "model": "torchslabs:block/lantern"}
+  }
+}

@@ -1,0 +1,7 @@
+{
+			"parent": "torchslabs:block/template_four_candles",
+			"textures": {
+			  "all": "block/cyan_candle",
+			  "particle": "block/cyan_candle"
+			}
+		  }

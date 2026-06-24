@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "lit=true":  { "model": "torchslabs:block/redstone_torch" },
+        "lit=false":  { "model": "torchslabs:block/redstone_torch_off" }
+    }
+}

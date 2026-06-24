@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "torchslabs:block/soul_torch" }
+    }
+}

@@ -15,7 +15,8 @@ apply plugin: 'maven-publish'
 
 version = "${minecraft_version}-${mod_version}"
 group = mod_group_id
-archivesBaseName = mod_id
+// Jar is branded with the display name, e.g. "Torch Slabs Renewed-1.20.1-2.0.0.jar"
+archivesBaseName = mod_name
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
