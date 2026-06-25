@@ -3,6 +3,8 @@ package com.github.bigenergy.torchslabs.blocks.vanilla;
 //import com.endlesnights.naturalslabsmod.blocks.FenceSlabBlock;
 //import com.github.bigenergy.torchslabs.blocks.quark.BlockChainSlab;
 
+import com.github.bigenergy.torchslabs.SupportUtil;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SlabType;
@@ -68,16 +70,14 @@ public class BlockLanternSlab extends LanternBlock
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos)
 	{
 		if(state == this.defaultBlockState())
-			return ((world.getBlockState(pos.relative(Direction.DOWN)).getBlock() instanceof SlabBlock 
-				&& world.getBlockState(pos.relative(Direction.DOWN)).getValue(SlabBlock.TYPE) == SlabType.BOTTOM)
+			return SupportUtil.isBottomSupport(world.getBlockState(pos.relative(Direction.DOWN)))
 					//|| (ModList.get().isLoaded("naturalslabsmod") && world.getBlockState(pos.relative(Direction.DOWN)).getBlock() instanceof FenceSlabBlock)
-					);		
+					;
 		else
-			return  ((world.getBlockState(pos.relative(Direction.UP)).getBlock() instanceof SlabBlock
-					&& world.getBlockState(pos.relative(Direction.UP)).getValue(SlabBlock.TYPE) == SlabType.TOP)
+			return SupportUtil.isTopSupport(world.getBlockState(pos.relative(Direction.UP)))
 					//|| (ModList.get().isLoaded("naturalslabsmod") && world.getBlockState(pos.relative(Direction.UP)).getBlock() instanceof FenceSlabBlock)
 					//|| world.getBlockState(pos.relative(Direction.UP)).getBlock() instanceof BlockChainSlab
-					);
+					;
 	}
 	
 	@Override

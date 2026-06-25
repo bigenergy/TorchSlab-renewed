@@ -16,6 +16,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.WallTorchBlock;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -62,7 +63,7 @@ private static final HashMap<ResourceLocation, Supplier<Block>> PLACE_ENTRIES = 
 			return;
 		
 		if((face != Direction.UP && face != Direction.DOWN)
-				&& Block.canSupportCenter(world, pos, face)
+				&& (Block.canSupportCenter(world, pos, face) || world.getBlockState(pos).getBlock() instanceof WallBlock)
 				&& (world.isEmptyBlock(placeAt) || world.getFluidState(placeAt).getType() == Fluids.WATER || world.getFluidState(placeAt).getType() == Fluids.FLOWING_WATER) )
 		{
 			

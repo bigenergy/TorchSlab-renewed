@@ -3,6 +3,7 @@ package com.github.bigenergy.torchslabs.blocks.vanilla;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import com.github.bigenergy.torchslabs.SupportUtil;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
@@ -105,9 +106,7 @@ public class BlockCandleSlab extends CandleBlock {
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos)
 	{
 		
-		return ((world.getBlockState(pos.below()).getBlock() instanceof SlabBlock 
-				&& world.getBlockState(pos.below()).getValue(SlabBlock.TYPE) == SlabType.BOTTOM)
-				);
+		return SupportUtil.isBottomSupport(world.getBlockState(pos.below()));
 	}
 	
    protected Iterable<Vec3> getParticleOffsets(BlockState p_152812_) {

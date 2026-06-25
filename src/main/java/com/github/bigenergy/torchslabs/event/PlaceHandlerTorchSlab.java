@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 //import com.endlesnights.naturalslabsmod.blocks.FenceSlabBlock;
 import com.github.bigenergy.torchslabs.TorchSlabsMod;
+import com.github.bigenergy.torchslabs.SupportUtil;
 import com.github.bigenergy.torchslabs.blocks.vanilla.BlockTorchSlab;
 
 
@@ -59,15 +60,9 @@ public class PlaceHandlerTorchSlab
 		// Top of a BOTTOM slab -> upright torch.
 		// Underside of a TOP slab    -> hanging torch (sits high).
 		// Underside of a BOTTOM slab -> hanging torch (sits half a block lower).
-		boolean onBottomSlabTop = face == Direction.UP
-				&& world.getBlockState(pos).getBlock() instanceof SlabBlock
-				&& world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.BOTTOM;
-		boolean underTopSlab = face == Direction.DOWN
-				&& world.getBlockState(pos).getBlock() instanceof SlabBlock
-				&& world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.TOP;
-		boolean underBottomSlab = face == Direction.DOWN
-				&& world.getBlockState(pos).getBlock() instanceof SlabBlock
-				&& world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.BOTTOM;
+		boolean onBottomSlabTop = face == Direction.UP && SupportUtil.isBottomSupport(world.getBlockState(pos));
+		boolean underTopSlab = face == Direction.DOWN && SupportUtil.isTopSupport(world.getBlockState(pos));
+		boolean underBottomSlab = face == Direction.DOWN && SupportUtil.isBottomSupport(world.getBlockState(pos));
 		boolean hanging = underTopSlab || underBottomSlab;
 
 		if(

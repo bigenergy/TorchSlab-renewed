@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.TorchBlock;
 import net.minecraft.world.level.block.VineBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.WebBlock;
 
@@ -128,6 +129,7 @@ public class BlockWallLanternSlab extends LanternBlock
 			&& ((worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof SlabBlock && worldIn.getBlockState(pos.relative(direction)).getValue(SlabBlock.TYPE) == SlabType.BOTTOM)
 			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof StairBlock && worldIn.getBlockState(pos.relative(direction)).getValue(StairBlock.HALF) == Half.BOTTOM )
 			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof FenceBlock)
+			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof WallBlock)
 			//|| (ModList.get().isLoaded("naturalslabsmod") && worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof FenceSlabBlock)
 			|| (Block.canSupportCenter(worldIn, pos.relative(direction), direction) )))
 		{
@@ -137,6 +139,7 @@ public class BlockWallLanternSlab extends LanternBlock
 			&& ((worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof SlabBlock && worldIn.getBlockState(pos.relative(direction)).getValue(SlabBlock.TYPE) == SlabType.TOP)
 			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof StairBlock && worldIn.getBlockState(pos.relative(direction)).getValue(StairBlock.HALF) == Half.TOP )
 			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof FenceBlock)
+			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof WallBlock)
 			//|| (ModList.get().isLoaded("naturalslabsmod") && worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof FenceSlabBlock)
 			|| (Block.canSupportCenter( worldIn, pos.relative(direction), direction) )))
 				return true;

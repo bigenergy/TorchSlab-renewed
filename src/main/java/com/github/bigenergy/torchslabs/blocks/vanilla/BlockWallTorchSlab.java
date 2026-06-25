@@ -122,11 +122,13 @@ public class BlockWallTorchSlab extends WallTorchBlock
 		if(state.getValue(HALF) == Half.BOTTOM
 			&& ((worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof SlabBlock && worldIn.getBlockState(pos.relative(direction)).getValue(SlabBlock.TYPE) == SlabType.BOTTOM)
 			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof StairBlock && worldIn.getBlockState(pos.relative(direction)).getValue(StairBlock.HALF) == Half.BOTTOM )
+			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof WallBlock)
 			|| super.canSurvive(state, worldIn, pos)))
 				return true;
 		else if(state.getValue(HALF) == Half.TOP
 			&& ((worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof SlabBlock && worldIn.getBlockState(pos.relative(direction)).getValue(SlabBlock.TYPE) == SlabType.TOP)
 			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof StairBlock && worldIn.getBlockState(pos.relative(direction)).getValue(StairBlock.HALF) == Half.TOP )
+			|| (worldIn.getBlockState(pos.relative(direction)).getBlock() instanceof WallBlock)
 			|| super.canSurvive(state, worldIn, pos)))
 		{
 			return validTop(worldIn.getBlockState(pos.above()), state);

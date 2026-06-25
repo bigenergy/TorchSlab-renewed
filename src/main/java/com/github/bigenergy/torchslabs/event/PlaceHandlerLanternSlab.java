@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 //import com.endlesnights.naturalslabsmod.blocks.FenceSlabBlock;
 import com.github.bigenergy.torchslabs.TorchSlabsMod;
+import com.github.bigenergy.torchslabs.SupportUtil;
 //import com.github.bigenergy.torchslabs.blocks.quark.BlockChainSlab;
 
 import net.minecraft.world.level.block.Block;
@@ -52,9 +53,8 @@ private static final HashMap<ResourceLocation, Supplier<Block>> PLACE_ENTRIES = 
 		SoundType soundType;
 		
 		if(
-				((world.getBlockState(pos).getBlock() instanceof SlabBlock
-				&& ((world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.BOTTOM && face == Direction.UP)
-				|| (world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.TOP) && face == Direction.DOWN))
+				(((SupportUtil.isBottomSupport(world.getBlockState(pos)) && face == Direction.UP)
+				|| (SupportUtil.isTopSupport(world.getBlockState(pos)) && face == Direction.DOWN))
 				//|| (ModList.get().isLoaded("naturalslabsmod") && world.getBlockState(pos).getBlock() instanceof FenceSlabBlock)
 				//|| (world.getBlockState(pos).getBlock() instanceof BlockChainSlab && face == Direction.DOWN)
 						)

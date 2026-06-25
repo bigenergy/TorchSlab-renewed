@@ -2,6 +2,8 @@ package com.github.bigenergy.torchslabs.blocks.vanilla;
 
 //import com.endlesnights.naturalslabsmod.blocks.FenceSlabBlock;
 
+import com.github.bigenergy.torchslabs.SupportUtil;
+
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -75,15 +77,11 @@ public class BlockTorchSlab extends TorchBlock
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos)
 	{
 		if(state.getValue(HANGING))
-		{
-			SlabType needed = state.getValue(LOWERED) ? SlabType.BOTTOM : SlabType.TOP;
-			return (world.getBlockState(pos.above()).getBlock() instanceof SlabBlock
-					&& world.getBlockState(pos.above()).getValue(SlabBlock.TYPE) == needed);
-		}
+			return state.getValue(LOWERED)
+					? SupportUtil.isBottomSupport(world.getBlockState(pos.above()))
+					: SupportUtil.isTopSupport(world.getBlockState(pos.above()));
 		else
-			return (world.getBlockState(pos.below()).getBlock() instanceof SlabBlock
-//					&& world.getBlockState(pos.below()).get(SlabBlock.TYPE) == SlabType.BOTTOM)
-					&& world.getBlockState(pos.below()).getValue(SlabBlock.TYPE) == SlabType.BOTTOM)
+			return SupportUtil.isBottomSupport(world.getBlockState(pos.below()))
 					//|| (ModList.get().isLoaded("naturalslabsmod") && world.getBlockState(pos.relative(Direction.DOWN)).getBlock() instanceof FenceSlabBlock)
 					;
 	}

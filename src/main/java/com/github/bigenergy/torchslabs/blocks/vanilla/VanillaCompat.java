@@ -3,6 +3,7 @@ package com.github.bigenergy.torchslabs.blocks.vanilla;
 import com.github.bigenergy.torchslabs.ITorchSlabCompat;
 import com.github.bigenergy.torchslabs.TorchSlabsMod;
 import com.github.bigenergy.torchslabs.event.PlaceHandlerCandleSlab;
+import com.github.bigenergy.torchslabs.event.PlaceHandlerChainSlab;
 import com.github.bigenergy.torchslabs.event.PlaceHandlerEndRod;
 import com.github.bigenergy.torchslabs.event.PlaceHandlerLanternSlab;
 import com.github.bigenergy.torchslabs.event.PlaceHandlerLanternWall;
@@ -122,7 +123,7 @@ public class VanillaCompat implements ITorchSlabCompat
 
 //		pad_soul_lantern = registerBlock(() -> new BlockPadLantern(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.LANTERN).func_235838_a_((p_235454_0_) -> {return 15; }).notSolid(), 's'), "pad_soul_lantern");
 
-		//chain_slab = registerBlock(() -> new BlockChainSlab(Block.Properties.from(Blocks.field_235341_dI_).lootFrom(Blocks.field_235341_dI_)),"chain_slab");
+		chain_slab = registerBlock("chain_slab", () -> new BlockChainSlab(Block.Properties.copy(Blocks.CHAIN).dropsLike(Blocks.CHAIN)));
 
 		candle_slab = registerBlock("candle_slab", () -> new BlockCandleSlab(Block.Properties.copy(Blocks.CANDLE), Items.CANDLE));
 		candle_black_slab = registerBlock("candle_black_slab", () -> new BlockCandleSlab(Block.Properties.copy(Blocks.BLACK_CANDLE), Items.BLACK_CANDLE));
@@ -181,7 +182,7 @@ public class VanillaCompat implements ITorchSlabCompat
 		PlaceHandlerPadLights.registerPlaceEntry(ForgeRegistries.ITEMS.getKey(Items.LANTERN), pad_lantern);
 		PlaceHandlerPadLights.registerPlaceEntry(ForgeRegistries.ITEMS.getKey(Items.SOUL_LANTERN), pad_soul_lantern);
 
-		//PlaceHandlerChainSlab.registerPlaceEntry(Items.field_234729_dO_.getRegistryName(), chain_slab);
+		PlaceHandlerChainSlab.registerPlaceEntry(ForgeRegistries.ITEMS.getKey(Items.CHAIN), chain_slab.get());
 		PlaceHandlerEndRod.registerPlaceEntry(ForgeRegistries.ITEMS.getKey(Items.END_ROD), end_rod_slab);
 
 
@@ -227,6 +228,7 @@ public class VanillaCompat implements ITorchSlabCompat
 	public void registerRenderTypes()
 	{
 		RenderType transparentRenderType = RenderType.cutoutMipped();
+		ItemBlockRenderTypes.setRenderLayer(chain_slab.get(), transparentRenderType);
 		ItemBlockRenderTypes.setRenderLayer(torch.get(), transparentRenderType);
 		ItemBlockRenderTypes.setRenderLayer(lantern.get(), transparentRenderType);
 		ItemBlockRenderTypes.setRenderLayer(wall_torch_slab.get(), transparentRenderType);

@@ -57,7 +57,7 @@ public class PlaceHandlerTorchWall
 			return;
 		
 		if((face != Direction.UP && face != Direction.DOWN)
-				&& Block.canSupportCenter(world, pos, face)
+				&& (Block.canSupportCenter(world, pos, face) || world.getBlockState(pos).getBlock() instanceof WallBlock)
 				&& (world.isEmptyBlock(placeAt) || world.getBlockState(placeAt).getBlock() == Blocks.WATER || world.getFluidState(placeAt).getType() == Fluids.FLOWING_WATER) )
 		{	
 

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.function.Supplier;
 
 import com.github.bigenergy.torchslabs.TorchSlabsMod;
+import com.github.bigenergy.torchslabs.SupportUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -53,8 +54,7 @@ public class PlaceHandlerCandleSlab {
 			SoundType soundType;
 					
 			
-			if(world.getBlockState(pos).getBlock() instanceof SlabBlock && face == Direction.UP 
-					&& world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.BOTTOM 
+			if(SupportUtil.isBottomSupport(world.getBlockState(pos)) && face == Direction.UP
 					&& (world.isEmptyBlock(placeAt) || world.getFluidState(placeAt).getType() == Fluids.WATER || world.getFluidState(placeAt).getType() == Fluids.FLOWING_WATER) )
 			{
 				if(block instanceof SimpleWaterloggedBlock) {
@@ -72,8 +72,7 @@ public class PlaceHandlerCandleSlab {
 					held.shrink(1);
 				event.setCanceled(true);			
 			}
-			else if((world.getBlockState(pos).getBlock() instanceof SlabBlock && face == Direction.UP 
-					&& world.getBlockState(pos).getValue(SlabBlock.TYPE) == SlabType.BOTTOM 
+			else if((SupportUtil.isBottomSupport(world.getBlockState(pos)) && face == Direction.UP
 					&& (world.getBlockState(placeAt).getBlock() == block && world.getBlockState(placeAt).getValue(CandleBlock.CANDLES) < 4))
 					|| (world.getBlockState(pos).getBlock() == block && world.getBlockState(pos).getValue(CandleBlock.CANDLES) < 4 ))
 			{
