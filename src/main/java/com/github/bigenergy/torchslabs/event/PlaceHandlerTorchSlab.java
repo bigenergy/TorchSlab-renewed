@@ -8,6 +8,7 @@ import java.util.function.Supplier;
 import com.github.bigenergy.torchslabs.TorchSlabsMod;
 import com.github.bigenergy.torchslabs.SupportUtil;
 import com.github.bigenergy.torchslabs.blocks.vanilla.BlockTorchSlab;
+import com.github.bigenergy.torchslabs.config.TorchSlabConfig;
 
 
 import net.minecraft.world.level.block.Block;
@@ -64,6 +65,10 @@ public class PlaceHandlerTorchSlab
 		boolean underTopSlab = face == Direction.DOWN && SupportUtil.isTopSupport(world.getBlockState(pos));
 		boolean underBottomSlab = face == Direction.DOWN && SupportUtil.isBottomSupport(world.getBlockState(pos));
 		boolean hanging = underTopSlab || underBottomSlab;
+
+		// Hanging torches under slabs/stairs can be turned off in the config.
+		if(hanging && !TorchSlabConfig.underBlockTorchCheck.get())
+			return;
 
 		if(
 				(onBottomSlabTop || hanging)

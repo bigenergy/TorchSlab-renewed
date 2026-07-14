@@ -10,6 +10,7 @@ public class TorchSlabConfig
 	public static ForgeConfigSpec.BooleanValue wallLanternCheck;
 	public static ForgeConfigSpec.BooleanValue lowerLanternCheck;
 	public static ForgeConfigSpec.BooleanValue upperBlockCheck;
+	public static ForgeConfigSpec.BooleanValue underBlockTorchCheck;
 	public static ForgeConfigSpec.ConfigValue<List<String>> interactiveCheckList;
 	
 	public static void init(ForgeConfigSpec.Builder server)
@@ -28,7 +29,12 @@ public class TorchSlabConfig
 				.comment("Allow the placemnet of torchs on upper half of wall blocks. Does not effect the placement on upper slabs sides, or the sides/front of stairs. [True / False]")
 				.define("torchslabmodconfig.TorchUpperBlockCheck", false)
 				;
-		
+
+		underBlockTorchCheck = server
+				.comment("Allow placing torches hanging under the underside of slabs and stairs. [True / False]")
+				.define("torchslabmodconfig.TorchUnderBlockCheck", true)
+				;
+
 		interactiveCheckList = server
 				.comment("List of interactive blocks that require the player be shift clicked when placing a block. To add additional blocks, just use the formot of \"ModID:Block_RegistryName\"")
 				.define("torchslabmodconfig.interactiveCheckList", list())
