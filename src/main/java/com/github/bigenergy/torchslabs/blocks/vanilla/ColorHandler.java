@@ -55,15 +55,11 @@ public class ColorHandler
 					
 					);
 		}
-		catch(Error e)
+		catch(Error | Exception e)
 		{
 			System.out.println("Error while attpeing to load base lillypad blocks:" + e.getMessage());
 		}
-		catch(Exception e)
-		{
-			System.out.println("Error while attpeing to load base lillypad blocks:" + e.getMessage());
-		}
-		
+
 //		if(ModList.get().isLoaded("buzzierbees"))
 //		{
 //			try

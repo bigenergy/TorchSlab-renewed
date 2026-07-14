@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.function.Supplier;
 
 import com.github.bigenergy.torchslabs.TorchSlabsMod;
+import com.github.bigenergy.torchslabs.CompatUtil;
 import com.github.bigenergy.torchslabs.blocks.vanilla.BlockWallTorchSlab;
 import com.github.bigenergy.torchslabs.config.TorchSlabConfig;
 
@@ -29,7 +30,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -42,8 +42,8 @@ private static final HashMap<ResourceLocation, Supplier<Block>> PLACE_ENTRIES = 
 	@SubscribeEvent
 	public static void onBlockEntityPlace(RightClickBlock event)
 	{
-		// Yield lantern placement to Amendments (keeps its lantern physics) when it is installed.
-		if(ModList.get().isLoaded("amendments") && TorchSlabConfig.amendmentsLanternCompat.get())
+		// Defer lantern placement to Amendments / Supplementaries when installed (keeps their lantern behaviour).
+		if(CompatUtil.yieldLanterns())
 			return;
 
 		ItemStack held = event.getItemStack();
