@@ -76,12 +76,17 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
+    maven { url = "https://www.cursemaven.com" } // Amendments (soft dependency)
 }
 
 dependencies {
     // Specify the version of Minecraft to use.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    // Amendments — soft compat only (detected at runtime via ModList, no API is referenced),
+    // so it is pulled at runtime for dev/testing and is NOT a compile or hard dependency.
+    runtimeOnly fg.deobf("curse.maven:amendments-896746:7470401")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

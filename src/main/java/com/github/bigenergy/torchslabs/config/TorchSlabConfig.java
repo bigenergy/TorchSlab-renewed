@@ -11,6 +11,7 @@ public class TorchSlabConfig
 	public static ForgeConfigSpec.BooleanValue lowerLanternCheck;
 	public static ForgeConfigSpec.BooleanValue upperBlockCheck;
 	public static ForgeConfigSpec.BooleanValue underBlockTorchCheck;
+	public static ForgeConfigSpec.BooleanValue amendmentsLanternCompat;
 	public static ForgeConfigSpec.ConfigValue<List<String>> interactiveCheckList;
 	
 	public static void init(ForgeConfigSpec.Builder server)
@@ -33,6 +34,11 @@ public class TorchSlabConfig
 		underBlockTorchCheck = server
 				.comment("Allow placing torches hanging under the underside of slabs and stairs. [True / False]")
 				.define("torchslabmodconfig.TorchUnderBlockCheck", true)
+				;
+
+		amendmentsLanternCompat = server
+				.comment("When the Amendments mod is installed, let it handle lantern placement so its lantern physics keep working, instead of Torch Slabs intercepting lanterns. Torches, candles, chains and end rods are unaffected. [True / False]")
+				.define("torchslabmodconfig.AmendmentsLanternCompat", true)
 				;
 
 		interactiveCheckList = server

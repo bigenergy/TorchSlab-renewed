@@ -29,6 +29,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -40,7 +41,11 @@ private static final HashMap<ResourceLocation, Supplier<Block>> PLACE_ENTRIES = 
 	
 	@SubscribeEvent
 	public static void onBlockEntityPlace(RightClickBlock event)
-	{	
+	{
+		// Yield lantern placement to Amendments (keeps its lantern physics) when it is installed.
+		if(ModList.get().isLoaded("amendments") && TorchSlabConfig.amendmentsLanternCompat.get())
+			return;
+
 		ItemStack held = event.getItemStack();
 		ResourceLocation rl = ForgeRegistries.ITEMS.getKey(held.getItem());
 
